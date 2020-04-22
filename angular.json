@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pluralSightProductManegmentProject"
+    }
+  },
+  "defaultProject": "pluralSightProductManegmentProject",
+  "cli": {
+    "analytics": "3449ad95-ccbe-4010-bec7-1dddbc63c2ed"
+  }
 }
