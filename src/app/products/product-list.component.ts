@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduit} from './produit'
 @Component({
 selector:'app-products',
 templateUrl:'./product-list.component.html',
 styleUrls:['./product-listFirst.component.scss','./product-listSecond.component.scss']
 })
-export class ProductListComponent{
+export class ProductListComponent implements OnInit{
+ 
     title: string='Product List';
     imageWidh=50;
     imageHeight=30;
     imageMargin=2;
     click=false;
-    filtredBy:string='cat';
+
+    _listFilter:string;
+    get listFilter(): string{return this._listFilter;}
+    set listFilter(value:string){this._listFilter=value;
+    this.filtredListProduct=this.listFilter ? this.performFilter(this.listFilter):this.products;
+    }
+
+    filtredListProduct:IProduit[];
+
     products:IProduit[]=[
         {
           "productId": 1,
@@ -64,11 +73,29 @@ export class ProductListComponent{
           "imageUrl": "assets/images/xbox-controller.png"
         }
       ];
+      constructor(){
+        this.filtredListProduct=this.products;
+        this.listFilter='cart';
+      }
+      performFilter(filterdBy:string):IProduit[]{
+
+        filterdBy=filterdBy.toLocaleLowerCase();
+        return this.products.filter((produit:IProduit) =>
+                                    produit.productName.toLocaleLowerCase().indexOf(filterdBy) !== -1);
+      
+      }
+
       onClickBtn():void{
         this.click= !this.click;
           }
           btnText(){
-            if (this.click===false)return 'Show Image';
-            else return 'Hide Image';
+            if (this.click===false)return 'Hide Image';
+            else return 'show Image';
+          }
+          ngOnInit(): void {
+           console.log('on init method')
+          }
+          onRaitingClicked(message:string):void{
+            this.title=this.title+message;
           }
 }

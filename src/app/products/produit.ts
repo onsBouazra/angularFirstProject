@@ -7,7 +7,7 @@ export interface IProduit{
     price:number;
     starRating:number;
     imageUrl:string;
-    calculateDiscount(percent:number):number;
+   // calculateDiscount(percent:number):number;
 }
 //export class Produit implements IProduit{
  //   constructor(public productId:number,

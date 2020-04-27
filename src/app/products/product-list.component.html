@@ -7,13 +7,13 @@
               <div class='col-md-2'>Filter by:</div>
               <div class='col-md-4'>
                 <input type='text'
-                 [(ngModel)]='filtredBy'/>
+                 [(ngModel)]='listFilter'/>
               </div>
             </div>
             <div class='row'
         >
       <div class='col-md-6'>
-        <h4>Filtered by: {{ filtredBy}}</h4>
+        <h4>Filtered by: {{ listFilter}}</h4>
       </div>
     </div>
     <div class='table-responsive' >
@@ -23,7 +23,7 @@
           <tr>
             <th>
               <!--<button class='btn btn-primary' (click)='onClickBtn()'>{{btnText()}}</button>-->   
-              <button class='btn btn-primary' (click)='onClickBtn()'>{{click ? 'Show ' : 'Hide '}}Image</button>                
+              <button class='btn btn-primary' (click)='onClickBtn()'>{{click ? 'Hide ' :'Show '  }}Image</button>                
             </th>
             <th>Product</th>
             <th>Code</th>
@@ -33,15 +33,14 @@
           </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let Product of products">
+              <tr *ngFor="let Product of filtredListProduct">
                 <td><img *ngIf="click" [src]='Product.imageUrl' [title]='Product.productName' [style.width.px]="imageWidh" [style.height.px]="imageHeight" [style.margin.px]="imageMargin"></td>
                <td>{{Product.productName}}</td>
-                <td>{{Product.productCode |uppercase}}</td>
+                <td>{{Product.productCode |convertToSpace:'-'}}</td>
                 <td>{{Product.releaseDate}}</td>
                 <td>{{Product.price | currency}} </td>
-                <td>{{Product.starRating}}</td>
-    
-               
+                <td><star-pm [rating]="Product.starRating"
+                  (ratingClicked)="onRaitingClicked($event)"></star-pm></td>    
               </tr>
              
             </tbody>
