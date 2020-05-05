@@ -35,7 +35,7 @@
             <tbody>
               <tr *ngFor="let Product of filtredListProduct">
                 <td><img *ngIf="click" [src]='Product.imageUrl' [title]='Product.productName' [style.width.px]="imageWidh" [style.height.px]="imageHeight" [style.margin.px]="imageMargin"></td>
-               <td>{{Product.productName}}</td>
+               <td> <a [routerLink]="['/listComponent',Product.productId]">{{Product.productName}}</a></td>
                 <td>{{Product.productCode |convertToSpace:'-'}}</td>
                 <td>{{Product.releaseDate}}</td>
                 <td>{{Product.price | currency}} </td>
